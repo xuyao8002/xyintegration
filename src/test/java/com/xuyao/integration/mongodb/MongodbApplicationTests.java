@@ -1,6 +1,6 @@
 package com.xuyao.integration.mongodb;
 
-import com.xuyao.integration.Person;
+import com.xuyao.integration.model.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

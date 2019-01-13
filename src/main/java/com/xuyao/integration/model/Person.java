@@ -1,4 +1,4 @@
-package com.xuyao.integration;
+package com.xuyao.integration.model;
 
 /**
  * Created by xuyao on 2018/9/5.

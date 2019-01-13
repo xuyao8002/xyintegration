@@ -1,5 +1,6 @@
 package com.xuyao.integration.redis;
 
+import com.xuyao.integration.model.Person;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -59,10 +58,15 @@ public class RedisApplicationTests {
 
 //		BlockingQueue<String> bq = new LinkedBlockingDeque<>();
 //		bq.poll(10L, TimeUnit.SECONDS);
-		TimeUnit seconds = TimeUnit.SECONDS;
-		long timeout = 10L;
-		long nanos = seconds.toNanos(timeout);
-		System.out.println(nanos);
+		Person person = new Person();
+		person.setName("xuyao");
+		person.setAge(29);
+		long start = System.currentTimeMillis();
+		for(int i = 0; i < 100; i ++){
+			redisTemplate.opsForList().leftPush("person", person);
+		}
+		System.out.println(System.currentTimeMillis() - start);
+//		System.out.println(redisTemplate.opsForList().leftPop("person"));
 	}
 
 }
