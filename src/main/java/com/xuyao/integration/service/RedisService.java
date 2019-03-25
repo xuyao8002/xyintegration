@@ -1,5 +1,6 @@
 package com.xuyao.integration.service;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public interface RedisService {
@@ -21,7 +22,11 @@ public interface RedisService {
 
     String getString(String key);
 
-    String get(String key, long start, long end);
-
     String getString(String key, long start, long end);
+
+    <K, V> Long addSet(K key, V[] value);
+
+    <K> Set getSet(K key);
+
+    <K, V> boolean isMember(K key, V value);
 }

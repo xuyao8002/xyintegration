@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -59,13 +60,23 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public String get(String key, long start, long end){
+    public String getString(String key, long start, long end){
         return stringRedisTemplate.opsForValue().get(key, start, end);
     }
 
     @Override
-    public String getString(String key, long start, long end){
-        return stringRedisTemplate.opsForValue().get(key, start, end);
+    public <K, V> Long addSet(K key, V... value){
+        return redisTemplate.opsForSet().add(key, value);
+    }
+
+    @Override
+    public <K> Set getSet(K key){
+        return redisTemplate.opsForSet().members(key);
+    }
+
+    @Override
+    public <K, V> boolean isMember(K key, V value){
+        return redisTemplate.opsForSet().isMember(key, value);
     }
 
 }
